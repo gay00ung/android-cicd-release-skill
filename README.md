@@ -45,6 +45,21 @@ You can also pass a target version:
 Use $android-cicd-release to bump this Android app to 2.0.0 and release it.
 ```
 
+## Publish this repository
+
+After creating an empty public GitHub repository, push this local repo:
+
+```bash
+git remote add origin git@github.com:<owner>/android-cicd-release-skill.git
+git push -u origin main
+```
+
+Or with GitHub CLI:
+
+```bash
+gh repo create android-cicd-release-skill --public --source=. --remote=origin --push
+```
+
 ## Safety model
 
 The skill tells Codex to stop before editing unless all of these are true:
@@ -103,4 +118,3 @@ python3 -m unittest discover -s tests
 ├── docs/research.md              # Similar-tool research and positioning
 └── README.md
 ```
-
