@@ -5,6 +5,10 @@
   <a href="./README.ko.md"><img alt="한국어" src="https://img.shields.io/badge/lang-%ED%95%9C%EA%B5%AD%EC%96%B4-16a34a.svg"></a>
 </p>
 
+<p align="center">
+  <img src="./assets/android-cicd-release-hero.png" alt="Android CI/CD Release Skill 대표 이미지" width="900">
+</p>
+
 기존 CI/CD 릴리스 자동화가 있는 Android 레포에서 버전 변경과 태그 기반 배포를 안전하게 준비하도록 돕는 Codex 스킬입니다.
 
 이 스킬은 또 하나의 버전 관리 플러그인이나 GitHub Action이 아닙니다. Codex가 레포를 먼저 검사하고, 기존 릴리스 관례를 읽고, `versionName`을 추론해야 할 때 사용자 확인을 받은 뒤, 레포의 CI/CD 스크립트가 태그 푸시를 배포 트리거로 사용한다는 근거가 있을 때만 커밋, 푸시, 릴리스 태그 생성을 진행하게 하는 워크플로 가드레일입니다.
@@ -105,6 +109,7 @@ python3 -m unittest discover -s tests
 
 ```text
 .
+├── assets/                       # README 이미지
 ├── skill/android-cicd-release/   # 설치 가능한 Codex 스킬
 ├── tests/                        # 스크립트 회귀 테스트와 fixture
 ├── docs/research.md              # 유사 도구 조사와 포지셔닝

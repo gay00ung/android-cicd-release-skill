@@ -5,6 +5,10 @@
   <a href="./README.ko.md"><img alt="한국어" src="https://img.shields.io/badge/lang-%ED%95%9C%EA%B5%AD%EC%96%B4-16a34a.svg"></a>
 </p>
 
+<p align="center">
+  <img src="./assets/android-cicd-release-hero.png" alt="Android CI/CD Release Skill hero image" width="900">
+</p>
+
 A Codex skill for safely preparing Android release bumps in repositories that already have CI/CD release automation.
 
 This is not another versioning plugin or GitHub Action. It is a Codex workflow guardrail: inspect the repository, learn the existing release convention, ask for confirmation when the next `versionName` is not explicit, then commit, push, and create the release tag only when the repository's own CI/CD scripts show that tag pushes are the intended deployment trigger.
@@ -105,6 +109,7 @@ python3 -m unittest discover -s tests
 
 ```text
 .
+├── assets/                       # README images
 ├── skill/android-cicd-release/   # The installable Codex skill
 ├── tests/                        # Script regression tests and fixtures
 ├── docs/research.md              # Similar-tool research and positioning
