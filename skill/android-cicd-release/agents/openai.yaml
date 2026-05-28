@@ -1,0 +1,5 @@
+interface:
+  display_name: "Android CI/CD Release"
+  short_description: "Safely bump Android versions and release by CI/CD tag"
+  default_prompt: "Use $android-cicd-release to inspect this Android repo, plan a safe version bump, and release through its existing CI/CD tag flow."
+

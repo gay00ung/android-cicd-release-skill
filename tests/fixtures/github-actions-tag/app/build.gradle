@@ -1,0 +1,14 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "com.example.fixture"
+
+    defaultConfig {
+        applicationId "com.example.fixture"
+        versionCode 12
+        versionName "1.2.3"
+    }
+}
+
