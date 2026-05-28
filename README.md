@@ -1,5 +1,10 @@
 # Android CI/CD Release Skill
 
+<p align="center">
+  <a href="./README.md"><img alt="English" src="https://img.shields.io/badge/lang-English-2563eb.svg"></a>
+  <a href="./README.ko.md"><img alt="한국어" src="https://img.shields.io/badge/lang-%ED%95%9C%EA%B5%AD%EC%96%B4-16a34a.svg"></a>
+</p>
+
 A Codex skill for safely preparing Android release bumps in repositories that already have CI/CD release automation.
 
 This is not another versioning plugin or GitHub Action. It is a Codex workflow guardrail: inspect the repository, learn the existing release convention, ask for confirmation when the next `versionName` is not explicit, then commit, push, and create the release tag only when the repository's own CI/CD scripts show that tag pushes are the intended deployment trigger.
@@ -26,9 +31,11 @@ Existing tools usually automate one layer: a GitHub Action that edits Gradle fil
 
 ## Install
 
-Copy the skill folder into your Codex skills directory:
+Clone the repository and copy the skill folder into your Codex skills directory:
 
 ```bash
+git clone https://github.com/gay00ung/android-cicd-release-skill.git
+cd android-cicd-release-skill
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 cp -R skill/android-cicd-release "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
@@ -43,21 +50,6 @@ You can also pass a target version:
 
 ```text
 Use $android-cicd-release to bump this Android app to 2.0.0 and release it.
-```
-
-## Publish this repository
-
-After creating an empty public GitHub repository, push this local repo:
-
-```bash
-git remote add origin git@github.com:<owner>/android-cicd-release-skill.git
-git push -u origin main
-```
-
-Or with GitHub CLI:
-
-```bash
-gh repo create android-cicd-release-skill --public --source=. --remote=origin --push
 ```
 
 ## Safety model
@@ -116,5 +108,6 @@ python3 -m unittest discover -s tests
 ├── skill/android-cicd-release/   # The installable Codex skill
 ├── tests/                        # Script regression tests and fixtures
 ├── docs/research.md              # Similar-tool research and positioning
-└── README.md
+├── README.md
+└── README.ko.md
 ```
