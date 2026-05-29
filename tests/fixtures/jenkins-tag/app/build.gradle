@@ -1,0 +1,13 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "com.example.jenkins"
+
+    defaultConfig {
+        applicationId "com.example.jenkins"
+        versionCode 4
+        versionName "0.9.9"
+    }
+}

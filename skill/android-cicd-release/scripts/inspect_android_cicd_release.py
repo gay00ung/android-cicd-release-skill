@@ -61,9 +61,9 @@ TRIGGER_HINTS = [
     (re.compile(r"\bonly\s*:\s*(\[)?\s*tags\b", re.IGNORECASE), "GitLab tag-only job"),
     (re.compile(r"\brules\s*:", re.IGNORECASE), "rules block"),
     (re.compile(r"\bCI_COMMIT_TAG\b"), "GitLab tag variable"),
-    (re.compile(r"\brefs/tags\b"), "tag ref check"),
+    (re.compile(r"\brefs\\?/tags\b"), "tag ref check"),
     (re.compile(r"\bGITHUB_REF_TYPE\b.*\btag\b|\btag\b.*\bGITHUB_REF_TYPE\b"), "GitHub tag type check"),
-    (re.compile(r"\bgithub\.ref\b.*\brefs/tags\b|\brefs/tags\b.*\bgithub\.ref\b"), "GitHub tag ref check"),
+    (re.compile(r"\bgithub\.ref\b.*\brefs\\?/tags\b|\brefs\\?/tags\b.*\bgithub\.ref\b"), "GitHub tag ref check"),
     (re.compile(r"\bworkflow_dispatch\b", re.IGNORECASE), "manual GitHub workflow"),
     (re.compile(r"\bwhen\s*:\s*manual\b", re.IGNORECASE), "manual GitLab job"),
     (re.compile(r"\btag_name\b", re.IGNORECASE), "release tag name"),
@@ -399,4 +399,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

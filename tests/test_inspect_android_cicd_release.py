@@ -64,6 +64,44 @@ class InspectAndroidCicdReleaseTests(unittest.TestCase):
         self.assertEqual(report["android_versions"][0]["matches"][1]["next_patch"], "1.2.4")
         self.assertEqual(report["semver_tag_patterns"][0]["pattern"], "v{version}")
 
+    def test_detects_gitlab_ci_and_kotlin_dsl_versions(self) -> None:
+        self.tmp = make_git_repo("gitlab-tag", tag="android-v2.3.4")
+
+        result = run([sys.executable, str(SCRIPT), "--json", "--require-ci", str(self.tmp)], ROOT)
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(report["ci_files"][0]["kind"], "GitLab CI")
+        hints = json.dumps(report["ci_trigger_hints"])
+        self.assertIn("GitLab tag variable", hints)
+        self.assertEqual(report["android_versions"][0]["path"], "app/build.gradle.kts")
+        self.assertEqual(report["android_versions"][0]["matches"][0]["next"], "8")
+        self.assertEqual(report["android_versions"][0]["matches"][1]["next_patch"], "2.3.5")
+        self.assertEqual(report["semver_tag_patterns"][0]["pattern"], "android-v{version}")
+
+    def test_detects_jenkins_tag_release_hint(self) -> None:
+        self.tmp = make_git_repo("jenkins-tag", tag="release/0.9.9")
+
+        result = run([sys.executable, str(SCRIPT), "--json", "--require-ci", str(self.tmp)], ROOT)
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(report["ci_files"][0]["kind"], "Jenkins")
+        hints = json.dumps(report["ci_trigger_hints"])
+        self.assertIn("tag ref check", hints)
+        self.assertEqual(report["semver_tag_patterns"][0]["pattern"], "release/{version}")
+
+    def test_detects_gradle_properties_versions(self) -> None:
+        self.tmp = make_git_repo("gradle-properties", tag="v3.4.5")
+
+        result = run([sys.executable, str(SCRIPT), "--json", "--require-ci", str(self.tmp)], ROOT)
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(report["android_versions"][0]["path"], "gradle.properties")
+        self.assertEqual(report["android_versions"][0]["matches"][0]["next"], "43")
+        self.assertEqual(report["android_versions"][0]["matches"][1]["next_patch"], "3.4.6")
+
     def test_require_ci_fails_without_ci_files(self) -> None:
         self.tmp = make_git_repo("no-ci")
 
@@ -83,4 +121,3 @@ class InspectAndroidCicdReleaseTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -1,0 +1,15 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Release') {
+      when {
+        expression { return env.GIT_BRANCH ==~ /refs\/tags\/.+/ }
+      }
+      steps {
+        sh './gradlew assembleRelease'
+        sh 'fastlane deploy'
+      }
+    }
+  }
+}
